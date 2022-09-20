@@ -1,0 +1,94 @@
+===============================
+The "5-text_indentation" module
+===============================
+
+Using "text_indentation"
+------------------------
+
+check for module docstring:
+    >>> m = __import__("5-text_indentation").__doc__
+    >>> len(m) > 1
+    True
+
+check for function import from module:
+    >>> text_indentation =  __import__("5-text_indentation").text_indentation
+
+check for function docstring:
+    >>> f = __import__("5-text_indentation").text_indentation.__doc__
+    >>> len(f) > 1
+    True
+
+check for no args:
+    >>> text_indentation()
+    Traceback (most recent call last):
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+check for many args:
+    >>> text_indentation("mary", "ate", "food")
+    Traceback (most recent call last):
+    TypeError: text_indentation() takes 1 positional argument but 3 were given
+
+check for passing None:
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+check for passing a non string:
+    >>> text_indentation(True)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+    >>> text_indentation(56)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+    >>> text_indentation(['goat', 8, {id: 124578}])
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+check for the specified delimiters :, ? and .:
+    >>> text_indentation("""Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis molestias nesciunt? Qui eos temporibus recusandae nobis illo nostrum quis enim. Nemo vitae illum eum: asperiores quae possimus, eligendi ducimus, placeat.""")
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    <BLANKLINE>
+    Corporis molestias nesciunt?
+    <BLANKLINE>
+    Qui eos temporibus recusandae nobis illo nostrum quis enim.
+    <BLANKLINE>
+    Nemo vitae illum eum:
+    <BLANKLINE>
+    asperiores quae possimus, eligendi ducimus, placeat.
+    <BLANKLINE>
+
+check for spaces:
+    >>> text_indentation("""Lorem ipsum      dolor sit amet          consectetur adipisicing elit. Corporis molestias nesciunt? Qui eos temporibus recusandae""")
+    Lorem ipsum      dolor sit amet          consectetur adipisicing elit.
+    <BLANKLINE>
+    Corporis molestias nesciunt?
+    <BLANKLINE>
+    Qui eos temporibus recusandae
+
+check for one word:
+    >>> text_indentation("school")
+    school
+
+check for newline at the beginning:
+    >>> text_indentation("\n Hi. Fellas what's goin on ?")
+    <BLANKLINE>
+     Hi.
+    <BLANKLINE>
+    Fellas what's goin on ?
+    <BLANKLINE>
+
+check for newline at the middle:
+    >>> text_indentation("Hi \n. Fellas what's goin on ?")
+    Hi 
+    .
+    <BLANKLINE>
+    Fellas what's goin on ?
+    <BLANKLINE>
+
+check for newline at the end:
+    >>> text_indentation("Hi. Fellas what's goin on ?\n")
+    Hi.
+    <BLANKLINE>
+    Fellas what's goin on ?
+    <BLANKLINE>
+    <BLANKLINE>
